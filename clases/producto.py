@@ -1,12 +1,13 @@
 class Producto():
     id_producto = 0
-    def __init__(self, nombre:str, descripcion:str,precio:float,stock:int) -> None:
+    def __init__(self, nombre:str, descripcion:str,precio:float,stock:int, categoria: str) -> None:
         Producto.id_producto += 1
         self.__id = Producto.id_producto
         self.__nombre = nombre
         self.__descripcion = descripcion
         self.__precio = precio
         self.__stock = stock
+        self.__categoria = categoria
     
     @property
     def id(self):
@@ -47,9 +48,17 @@ class Producto():
     @stock.setter
     def stock(self, nuevo_stock):
         self.__stock = nuevo_stock
+    
+    @property
+    def categoria(self):
+        return self.__categoria
+    
+    @categoria.setter
+    def categoria(self, nuevo_categoria):
+        self.__categoria = nuevo_categoria
         
     def __str__(self) -> str:
-        return f"Id Producto: {self.id} | Nombre Producto: {self.nombre} | Descripcion: {self.descripcion} | Precio: {self.precio} | Stock: {self.stock}"
+        return f"Id Producto: {self.id} | Nombre Producto: {self.nombre} | Descripcion: {self.descripcion} | Precio: {self.precio} | Stock: {self.stock} | Categoria : {self.categoria}"
     
 
 producto1 = Producto("Alfajor Oreo Milka", "Alfajor 100gr Milka ", 850.22,40)

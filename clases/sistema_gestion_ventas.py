@@ -7,7 +7,7 @@ class SistemaGestionVentas():
         self.__lista_compras = []
         self.__usuarios = []
         self.__productos = []
-        
+        self.__categorias = []
         
     @property
     def nombre(self):
@@ -65,6 +65,14 @@ class SistemaGestionVentas():
     @productos.setter
     def productos(self,nuevo_productos):
         self.__productos = nuevo_productos
+    
+    @property
+    def categorias(self):
+        return self.__categorias
+    
+    @categorias.setter
+    def categorias(self,nuevo_categorias):
+        self.__categorias = nuevo_categorias
     
     def abrir_caja(self):
         self.__caja_abierta = True
