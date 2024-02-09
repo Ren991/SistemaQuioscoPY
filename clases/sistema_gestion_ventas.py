@@ -8,6 +8,7 @@ class SistemaGestionVentas():
         self.__usuarios = []
         self.__productos = []
         
+        
     @property
     def nombre(self):
         return self.__nombre
