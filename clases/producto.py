@@ -61,9 +61,9 @@ class Producto():
         return f"Id Producto: {self.id} | Nombre Producto: {self.nombre} | Descripcion: {self.descripcion} | Precio: {self.precio} | Stock: {self.stock} | Categoria : {self.categoria}"
     
 
-producto1 = Producto("Alfajor Oreo Milka", "Alfajor 100gr Milka ", 850.22,40)
+producto1 = Producto("Alfajor Oreo Milka", "Alfajor 100gr Milka ", 850.22,40," Alfajores")
 print(producto1)
 
-producto2 = Producto("Alfajor Guaymallen", "-", 850.22,40)
+producto2 = Producto("Alfajor Guaymallen", "-", 850.22,40,"Alfajores")
 print(producto2)
 
