@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from datos import productos
+from datos import productos,Producto,Categoria
+
+from tkinter.simpledialog import askstring
 
 class PantallaAdministracion:
     def __init__(self, root, username, mercado):
@@ -19,6 +21,10 @@ class PantallaAdministracion:
         # Botón para ver productos
         self.button_ver_productos = tk.Button(root, text="Ver Productos", command=self.ver_productos)
         self.button_ver_productos.pack(pady=10)
+        
+        # Botón para agregar productos
+        self.button_agregar_producto = tk.Button(root, text="Agregar Producto", command=self.agregar_producto)
+        self.button_agregar_producto.pack(pady=5)
         
         # Botón para cerrar la tabla (inicialmente oculto)
         self.button_cerrar_tabla = tk.Button(root, text="Cerrar Tabla", command=self.cerrar_tabla, state=tk.DISABLED)
@@ -62,6 +68,24 @@ class PantallaAdministracion:
         
         # Deshabilitar el botón para cerrar la tabla
         self.button_cerrar_tabla.config(state=tk.DISABLED)
+        
+    def agregar_producto(self):
+        # Solicitar al usuario los detalles del nuevo producto
+        nombre = askstring("Agregar Producto", "Nombre del Producto:")
+        descripcion = askstring("Agregar Producto", "Descripción:")
+        precio = float(askstring("Agregar Producto", "Precio:"))
+        stock = int(askstring("Agregar Producto", "Stock:"))
+        categoria = askstring("Agregar Producto", "Categoría:")
+        
+        # Crear una instancia del objeto Producto
+        nuevo_producto = Producto(nombre, descripcion, precio, stock, Categoria(categoria))
+        
+        # Agregar el nuevo producto al array productos en datos.py
+        productos.append(nuevo_producto)
+        
+        # Actualizar la tabla de productos
+        self.ver_productos()
+        
 if __name__ == "__main__":
     root = tk.Tk()
     app = PantallaAdministracion(root, PantallaAdministracion.username, PantallaAdministracion.mercado.nombre)
