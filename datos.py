@@ -5,6 +5,12 @@ from producto import Producto
 from usuario import Usuario
 
 
+# INSTANCIA CLASE SISTEMAGESTIONVENTAS
+
+sistemaGestionVentas1 = SistemaGestionVentas("Mercado 1")
+
+
+
 # INSTANCIAS CLASE USUARIO
 usuarios = []
 for i in range(5):
@@ -17,6 +23,7 @@ for i in range(5):
 # Imprimir las instancias creadas
 for usuario in usuarios:
     print(usuario)
+    sistemaGestionVentas1.registrar_usuario(usuario)
     
 #INSTANCIAS CLASE CATEGORIA
 
@@ -50,3 +57,10 @@ productos.extend([producto1, producto2, producto3, producto4, producto5, product
 
 for producto in productos:
     print(producto)
+    sistemaGestionVentas1.agregar_producto(producto)
+    
+
+
+    
+
+
