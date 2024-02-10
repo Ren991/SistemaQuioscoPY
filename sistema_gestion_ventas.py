@@ -1,7 +1,8 @@
-from compra import Compra
+
 from producto import Producto
 from categoria import Categoria
 from usuario import Usuario
+from compra import Compra
 
 class SistemaGestionVentas():
     def __init__(self,nombre:str) -> None:
