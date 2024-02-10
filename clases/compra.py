@@ -79,15 +79,3 @@ class Compra():
     
     
     
-producto1 = Producto("Alfajor Oreo Milka", "Alfajor 100gr Milka ", 850.22,40,"Alfajores")
-producto2 = Producto("Alfajor Guaymallen", "-", 850.22,40,"Alfajores")
-
-compra1 = Compra("efectivo")
-compra1.agregar_producto(producto1)
-compra1.agregar_producto(producto2)
-compra1.eliminar_producto(producto1)
-compra1.finalizar_compra()
-
-#print(compra1)
-
-print(producto1)

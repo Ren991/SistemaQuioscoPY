@@ -1,3 +1,8 @@
+from compra import Compra
+from producto import Producto
+from categoria import Categoria
+from usuario import Usuario
+
 class SistemaGestionVentas():
     def __init__(self,nombre:str) -> None:
         self.__nombre = nombre
@@ -76,13 +81,59 @@ class SistemaGestionVentas():
     
     def abrir_caja(self):
         self.__caja_abierta = True
+        self.__caja_cerrada = False
         
     def cerrar_caja(self):
         self.__caja_cerrada = True
         self.__caja_abierta = False
         
-    def registrar_compra(self):
-        pass
-    
-    
+    def registrar_compra(self,compra:Compra):
+        self.__lista_compras.append(compra)
         
+    def registrar_usuario(self,usuario:Usuario):
+        self.__usuarios.append(usuario)
+    
+    def eliminar_usuario(self,usuario:Usuario):
+        self.__usuarios.remove(usuario)
+    
+    def agregar_producto(self,producto: Producto):
+        self.__productos.append(producto)
+    
+    def eliminar_producto(self, producto: Producto):
+        self.__productos.remove(producto)
+        
+    def añadir_categoria(self, categoria: Categoria):
+        self.__categorias.append(categoria)
+    
+    def eliminar_categoria(self, categoria: Categoria):
+        self.__categorias.remove(categoria)
+     
+    
+    
+    def __str__(self):
+        return f"Nombre Negocio: {self.nombre}"
+    
+    
+
+
+sistemaGestionVentas1 = SistemaGestionVentas("Mercado Ricky Maravilla")
+
+
+
+producto1 = Producto("Alfajor Oreo Milka", "Alfajor 100gr Milka ", 850.22,40,"Alfajores")
+producto2 = Producto("Alfajor Guaymallen", "-", 850.22,40,"Alfajores")
+
+compra1 = Compra("efectivo")
+compra1.agregar_producto(producto1)
+compra1.agregar_producto(producto2)
+compra1.eliminar_producto(producto1)
+compra1.finalizar_compra()
+
+print(compra1)
+
+print(producto1)
+    
+sistemaGestionVentas1.registrar_compra(compra1)
+sistemaGestionVentas1.cerrar_caja()
+print(sistemaGestionVentas1.caja_cerrada)
+print(sistemaGestionVentas1.caja_abierta)
