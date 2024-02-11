@@ -58,6 +58,11 @@ class PantallaAdministracion:
         
         # Habilitar el botón para cerrar la tabla
         self.button_cerrar_tabla.config(state=tk.NORMAL)
+        
+        # Configurar el menú contextual para eliminar productos
+        self.menu_contextual = tk.Menu(self.root, tearoff=0)
+        self.menu_contextual.add_command(label="Eliminar Producto", command=self.eliminar_producto)
+        self.tree.bind("<Button-3>", self.mostrar_menu_contextual)
     
     def cerrar_tabla(self):
         # Verificar si la tabla existe
@@ -85,6 +90,22 @@ class PantallaAdministracion:
         
         # Actualizar la tabla de productos
         self.ver_productos()
+    
+    def mostrar_menu_contextual(self, event):
+        item = self.tree.identify_row(event.y)
+        if item:
+            self.tree.selection_set(item)
+            self.menu_contextual.post(event.x_root, event.y_root)
+
+    def eliminar_producto(self):
+        item = self.tree.selection()[0]
+        id_producto = self.tree.item(item, "text")
+        for producto in productos:
+            if producto.id == id_producto:
+                productos.remove(producto)
+                break
+        self.tree.delete(item)
+
         
 if __name__ == "__main__":
     root = tk.Tk()
