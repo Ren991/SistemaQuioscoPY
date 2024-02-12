@@ -110,7 +110,45 @@ class PantallaAdministracion:
         self.tree.delete(item)
 
     def editar_producto(self):
-        print("Abrio pantalla de editar producto")
+        # Obtener el índice del producto seleccionado
+        item = self.tree.selection()[0]
+        id_producto = self.tree.item(item, "text")
+
+        # Obtener los detalles del producto seleccionado
+        nombre = self.tree.item(item, "values")[0]
+        descripcion = self.tree.item(item, "values")[1]
+        precio = self.tree.item(item, "values")[2]
+        stock = self.tree.item(item, "values")[3]
+        categoria = self.tree.item(item, "values")[4]
+
+        # Abrir una ventana de diálogo para que el usuario ingrese los nuevos detalles del producto
+        nuevo_nombre = askstring("Editar Producto", "Nuevo Nombre del Producto:", initialvalue=nombre)
+        nueva_descripcion = askstring("Editar Producto", "Nueva Descripción:", initialvalue=descripcion)
+        nuevo_precio = float(askstring("Editar Producto", "Nuevo Precio:", initialvalue=precio))
+        nuevo_stock = int(askstring("Editar Producto", "Nuevo Stock:", initialvalue=stock))
+        nueva_categoria = askstring("Editar Producto", "Nueva Categoría:", initialvalue=categoria)
+
+        # Actualizar el producto en la lista de productos
+        for producto in productos:
+            if producto.id == id_producto:
+                producto.nombre = nuevo_nombre
+                producto.descripcion = nueva_descripcion
+                producto.precio = nuevo_precio
+                producto.stock = nuevo_stock
+                producto.categoria = Categoria(nueva_categoria)
+                break
+
+        # Actualizar la tabla de productos
+        self.actualizar_tabla_productos()
+
+    def actualizar_tabla_productos(self):
+        # Limpiar la tabla actual
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+
+        # Insertar los productos actualizados en la tabla
+        for producto in productos:
+            self.tree.insert("", 0, text=producto.id, values=(producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.categoria.nombre))
 
         
 if __name__ == "__main__":
