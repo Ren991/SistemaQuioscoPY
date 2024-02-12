@@ -62,7 +62,10 @@ class PantallaAdministracion:
         # Configurar el menú contextual para eliminar productos
         self.menu_contextual = tk.Menu(self.root, tearoff=0)
         self.menu_contextual.add_command(label="Eliminar Producto", command=self.eliminar_producto)
+        self.menu_contextual.add_command(label="Editar Producto", command=self.editar_producto) 
         self.tree.bind("<Button-3>", self.mostrar_menu_contextual)
+
+        
     
     def cerrar_tabla(self):
         # Verificar si la tabla existe
@@ -105,6 +108,9 @@ class PantallaAdministracion:
                 productos.remove(producto)
                 break
         self.tree.delete(item)
+
+    def editar_producto(self):
+        print("Abrio pantalla de editar producto")
 
         
 if __name__ == "__main__":
