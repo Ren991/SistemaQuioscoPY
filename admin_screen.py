@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-from datos import productos,Producto,Categoria
-
+from datos import productos, Producto, Categoria
+from datetime import datetime
 from tkinter.simpledialog import askstring
 
 class PantallaAdministracion:
@@ -12,7 +12,13 @@ class PantallaAdministracion:
         # Configurar el tamaño de la ventana
         self.root.geometry("800x400")  # Ancho x Alto
         
+        # Configurar la fecha y hora actual
+        self.fecha_hora_actual = tk.StringVar()
+        self.actualizar_fecha_hora()  # Actualizar fecha y hora inicialmente
+        
         # Configuración de la barra de título
+        self.label_fecha_hora = tk.Label(root, textvariable=self.fecha_hora_actual, font=("Arial", 10), fg="blue")
+        self.label_fecha_hora.pack(side="top", fill="x")  # Colocar en la esquina superior derecha
         self.label_titulo = tk.Label(root, text="Bienvenido, " + username)
         self.label_titulo.pack(side="top", fill="x")
         self.label_subtitulo = tk.Label(root, text="Gestión de =>" + mercado.nombre)
@@ -32,6 +38,16 @@ class PantallaAdministracion:
         
         # Variable para almacenar la tabla
         self.tree = None
+        
+        self.actualizar_fecha_hora_continuamente()
+        
+    def actualizar_fecha_hora(self):
+        now = datetime.now()
+        self.fecha_hora_actual.set(now.strftime("%Y-%m-%d %H:%M:%S"))
+    
+    def actualizar_fecha_hora_continuamente(self):
+        self.actualizar_fecha_hora()  # Actualizar la fecha y hora
+        self.root.after(1000, self.actualizar_fecha_hora_continuamente)
     
     def ver_productos(self):
         # Verificar si la tabla ya está creada y mostrada
@@ -65,8 +81,6 @@ class PantallaAdministracion:
         self.menu_contextual.add_command(label="Editar Producto", command=self.editar_producto) 
         self.tree.bind("<Button-3>", self.mostrar_menu_contextual)
 
-        
-    
     def cerrar_tabla(self):
         # Verificar si la tabla existe
         if self.tree is not None:
@@ -149,9 +163,8 @@ class PantallaAdministracion:
         # Insertar los productos actualizados en la tabla
         for producto in productos:
             self.tree.insert("", 0, text=producto.id, values=(producto.nombre, producto.descripcion, producto.precio, producto.stock, producto.categoria.nombre))
-
         
 if __name__ == "__main__":
     root = tk.Tk()
-    app = PantallaAdministracion(root, PantallaAdministracion.username, PantallaAdministracion.mercado.nombre)
+    app = PantallaAdministracion(root, "Usuario", Categoria("Mercado"))
     root.mainloop()
