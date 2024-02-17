@@ -35,12 +35,18 @@ class PantallaAdministracion:
         # Botón para cerrar la tabla (inicialmente oculto)
         self.button_cerrar_tabla = tk.Button(root, text="Cerrar Tabla", command=self.cerrar_tabla, state=tk.DISABLED)
         self.button_cerrar_tabla.pack(pady=5)
-        
+
+        # Botón para abrir la caja
+        self.button_abrir_caja = tk.Button(root, text="Abrir caja", command= self.abrir_caja)
+        self.button_abrir_caja.pack(pady=10)
         # Variable para almacenar la tabla
         self.tree = None
         
         self.actualizar_fecha_hora_continuamente()
         
+    def abrir_caja(self):
+        print("Abriendo caja")
+
     def actualizar_fecha_hora(self):
         now = datetime.now()
         self.fecha_hora_actual.set(now.strftime("%Y-%m-%d %H:%M:%S"))
@@ -81,6 +87,7 @@ class PantallaAdministracion:
         self.menu_contextual.add_command(label="Editar Producto", command=self.editar_producto) 
         self.tree.bind("<Button-3>", self.mostrar_menu_contextual)
 
+    
     def cerrar_tabla(self):
         # Verificar si la tabla existe
         if self.tree is not None:
