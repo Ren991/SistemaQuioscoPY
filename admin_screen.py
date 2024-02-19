@@ -3,6 +3,7 @@ from tkinter import ttk
 from datos import productos, Producto, Categoria
 from datetime import datetime
 from tkinter.simpledialog import askstring
+from caja_screen import PantallaCajaSupermercado
 
 class PantallaAdministracion:
     def __init__(self, root, username, mercado):
@@ -46,6 +47,10 @@ class PantallaAdministracion:
         
     def abrir_caja(self):
         print("Abriendo caja")
+        
+        # Crear una nueva ventana para la caja del supermercado
+        caja_root = tk.Toplevel(self.root)
+        caja_app = PantallaCajaSupermercado(caja_root)
 
     def actualizar_fecha_hora(self):
         now = datetime.now()
